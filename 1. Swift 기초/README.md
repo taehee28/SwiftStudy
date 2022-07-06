@@ -185,3 +185,67 @@ func printHello() { print("Hello") }
 sum(a: 1, b: 2)
 ```
 argument의 이름을 명시하면서 값을 전달한다. 
+
+</br>
+
+# 8. 함수 고급
+## 파라미터 기본 값
+함수의 파라미터 정의 부분에서 파라미터의 기본값을 지정해줄 수 있다. 
+```swift
+func sum(a: Int = 0, b: Int = 0) -> Int {
+    return a + b
+}
+
+// 기본값을 가지는 매개변수는 호출 시 생략 가능
+sum()
+```
+기본값을 가지는 파라미터는 파라미터 목록에서 뒤쪽에 위치하는 것이 좋다. 
+
+## 전달인자 레이블
+함수를 호출하는 곳에서 사용할 인자의 이름을 지정한다.  
+같은 함수여도 전달인자 레이블이 다르다면 다른 함수로 간주하여 중복 선언이 가능함.  
+```swift
+func sum(x a: Int, y b: Int) -> Int {
+    // 함수 내부에서는 기존 레이블 그대로 사용 
+    return a + b
+}
+
+// 호출할때는 지정된 전달인자 레이블을 사용
+sum(x: 1, y: 2)
+
+// 와일드카드 레이블
+func printHello(_ name: String) {
+    print("Hello \(name)")
+}
+
+// 와일드카드 레이블의 경우 레이블을 명시하지 않아도 됨 
+printHello("swift")
+```
+
+## 가변 파라미터
+파라미터의 개수를 가변적으로 받을 수 있다. 
+```swift
+func printNumbers(numbers: Int...) {
+    print(numbers)
+}
+
+// 원하는 만큼 인자를 넘길 수 있음
+printNumbers(numbers: 1, 2, 3, 4, 5, 6, 7)
+```
+가변 파라미터는 파라미터 목록에서 뒤쪽에 위치하는 것이 좋다. 
+
+## 데이터 타입으로서의 함수
+Swift에서 함수는 1급 객체로 취급한다. 
+```swift
+func sum(a: Int, b: Int) -> Int {
+    return a + b
+}
+
+// 인자의 레이블을 명시해서 변수에 넣어준다 
+let myFunction: (Int, Int) -> Int = sum(a:b:)
+
+myFunction(1, 2)
+```
+파라미터가 있는 함수의 경우 호출 시점에서 인자의 레이블을 꼭 입력해주어야 하는데,  
+myFunction을 선언할 때 레이블을 이미 전달했기 때문에 myFunction 내부에서 sum에 인자만 넘겨주면 됨
+
