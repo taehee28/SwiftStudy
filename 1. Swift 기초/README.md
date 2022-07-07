@@ -400,3 +400,57 @@ switch char {
         print("Not the letter A")
 }
 ```
+
+</br>
+
+# 10. 반복문
+## For-In Loop 
+`in` 키워드를 사용해서 for문을 작성할 수 있다.
+```swift
+let numbers = [1, 2, 3, 4, 5]
+
+for number in numbers {
+    print("number = \(number)")
+}
+
+// dictionary도 가능 
+let animals = ["dog": 1, "cat": 2, "bird": 3]
+
+for (animal, index) in animals {
+    print("\(index). \(animal)")
+}
+```
+
+`Ranges`와 함께 사용할 수 있다. 
+```swift
+// 1부터 10까지 
+for index in 1...10 {
+    print(index)
+}
+
+// 반복문의 변수가 필요 없다면, 비워둘 수 있다
+for _ in 1...10 {
+    print("hello")
+}
+```
+
+interval을 지정해주고 싶다면 `stride`를 사용할 수 있다.  
+* `stride(from:to:by:)` : `from`부터 `to` 이전까지 `by` 간격으로  
+* `stride(form:through:by)` : `from`부터 `through` 까지(포함) `by` 간격으로  
+```swift
+for index in stride(from: 0, through: 10, by: 2) {
+    print(index)
+}
+```
+
+## While Loop
+while은 별다를 것이 없다...
+```swift
+var index = 0
+
+while index < 10 {
+    print(index)
+    ++index
+}
+```
+`do-while`은 Swift에서 `repeat-while`라는 이름으로 쓰인다.
