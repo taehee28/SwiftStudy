@@ -266,3 +266,137 @@ swap(&x, &y)
 
 // 결과 -> x = 3, y = 2 로 변경됨 
 ```
+
+</br>
+
+# 9. 조건문
+## if 
+특이한 점은 조건문에 괄호를 사용하지 않는 점(사용할 수는 있다).
+```swift
+if someValue < 10 {
+    print("under 10")
+} else if someValue < 20 {
+    print("under 20")
+} else {
+    print("over 20")
+}
+```
+
+삼항연산자가 존재한다.
+```swift
+let result1
+if someValue > 10 {
+    result1 = "over 10"
+} else {
+    result1 = "under 10"
+}
+
+// 삼항연산자로 간략화 
+let result2 = someValue > 10 ? "over 10" : "under 10"
+```
+
+nil 체크의 경우 Nil-Coalescing 연산자가 존재한다. 
+```swift
+let c = a != nil ? a! : b
+
+// Nil-Coalescing 연산으로 간략화 
+let c = a ?? b
+```
+Kotlin의 `?:` 연산자와 같다고 보면 될 것 같다. 
+
+## switch 
+생긴 것은 Java의 switch와 비슷하다.  
+* `break` 키워드를 사용하지 않아도 자동으로 적용됨.  
+* case에 다양한 조건 사용 가능.  
+* 하나의 case에 여러개의 조건을 써넣을 수 있음(Java처럼 블록 없는 case를 써서 여러 case를 묶지 않음).  
+```swift
+let char: Character = "A"
+
+switch char {
+    case "a", "A":
+        print("The letter A")
+    default:
+        print("Not the letter A")
+}
+```
+
+범위 연산자 사용 가능함.
+```swift
+let score = 72
+
+switch score {
+    case 50..<60: 
+        print("grade: D")
+    case 60..<70: 
+        print("grade: C")
+    case 70..<80: 
+        print("grade: B")
+    case 80..<90: 
+        print("grade: A")
+    case 90...100: 
+        print("grade: A+")
+    default:
+        print("grade: F")
+}
+```
+
+Tuple 사용 가능함.
+```swift
+let somePoint = (1, 1)
+
+switch somePoint {
+    case (0, 0):
+        print("\(somePoint) is at the origin")
+    case (_, 0):
+        print("\(somePoint) is on the x-axis")
+    case (0, _):
+        print("\(somePoint) is on the y-axis")
+    case (-2...2, -2...2):
+        print("\(somePoint) is inside the box")
+    default:
+        print("\(somePoint) is outside of the box")
+}
+```
+
+Value Binding 가능함.
+```swift
+let anotherPoint = (2, 0)
+
+switch anotherPoint {
+    case (let x, 0):
+        print("on the x-axis with an x value of \(x)")
+    case (0, let y):
+        print("on the y-axis with a y value of \(y)")
+    case let (x, y):
+        print("somewhere else at (\(x), \(y))")
+}
+```
+
+`where` 키워드로 추가적인 조건을 지정할 수 있다.
+```swift
+let yetAnotherPoint = (1, -1)
+
+switch yetAnotherPoint {
+    case let (x, y) where x == y:
+        print("(\(x), \(y)) is on the line x == y")
+    case let (x, y) where x == -y:
+        print("(\(x), \(y)) is on the line x == -y")
+    case let (x, y):
+        print("(\(x), \(y)) is just some arbitrary point")
+}
+```
+
+`fallthrough` 키워드를 사용하면 바로 다음 case의 블록을 실행시킨다(다음 case의 조건은 검사하지 않음).
+```swift
+let char: Character = "A"
+
+switch char {
+    case "A":
+        print("The letter A")
+        fallthrough
+    case "a":
+        print("same as the letter a")
+    default:
+        print("Not the letter A")
+}
+```
