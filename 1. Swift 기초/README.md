@@ -454,3 +454,52 @@ while index < 10 {
 }
 ```
 `do-while`은 Swift에서 `repeat-while`라는 이름으로 쓰인다.
+
+</br>
+
+# 11. 옵셔널
+값이 있을 수도, 없을 수도(nil) 있는 타입.  
+같은 타입이여도 옵셔널이 붙으면 다른 타입으로 취급된다.  
+```swift
+var optionalValue: Optional<Int> = nil
+// 간단하게 물음표로 optional임을 표시할 수 있음
+var optionalValue: Int? = nil
+```
+
+느낌표는 암시적 추출 옵셔널로 만들 수 있다.  
+Kotlin의 느낌표 표시처럼 nil이 있거나 없을 수도 있다는 개념 자체가 없는 옵셔널로 만드는듯.  
+Java처럼 런타임에 에러가 발생하게 된다. 
+```swift
+val optionalValue: Int! = nil
+```
+
+## 옵셔널 추출하기 
+1. optional binding; if-let  
+nil체크를 통해 안전하게 추출할 수 있다. 
+```swift
+let optionalValue: Int? = nil
+
+if let unwrappedValue: Int = optionalValue {
+    print(unwrappedValue)
+}
+
+// 여러개 nil 체크도 가능하다
+let optionalA: Int? = 2
+let optionalB: Int? = nil
+
+// 전부 nil값이 없어야 코드 블럭이 실행됨
+if let a: Int = optionalA, let b: Int = optionalB {
+    print(a + b)
+}
+```
+
+2. 강제 추출 
+non-nil일 것 이라고 단정하고 강제로 추출.  
+nil인 경우 런타임 에러가 발생한다. 
+```swift
+let optionalValue: Int? = nil
+let value = 3
+
+// 런타임 에러 발생 
+sum(a: optionalVelue!, b: value)
+```
